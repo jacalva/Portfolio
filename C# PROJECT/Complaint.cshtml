@@ -1,0 +1,86 @@
+
+@page
+<!--Makes Complaint.cshtml a razor page by adding this line of code  -->.
+
+ @model ComplaintModel
+
+
+
+<form method="post">
+
+    <!--Code for Title of Page  -->
+<div class="text-center">
+    <h3 class="display-4">ThoughtTronix Complaint Form</h3>
+    <p>We are sorry to hear that you have a complaint. Please file your complaint below and we will get back to you shortly. </a></p>
+</div>
+
+
+<!-- Horizontal Lines -->
+<hr class="my-4">
+
+<!--Radio Buttons 1, 2, 3, 4 Below-->
+
+<h5 class="mb-3">Select A Product...</h5>
+
+  <div class="form-check">
+    <input asp-for="SelectedProduct" class="form-check-input" type="radio" value="1">
+    <label class="form-check-label">MindSync</label>
+  </div>
+  <div class="form-check">
+    <input asp-for="SelectedProduct" class="form-check-input" type="radio" value="2">
+    <label class="form-check-label">Seraphine</label>
+  </div>
+  <div class="form-check">
+    <input asp-for="SelectedProduct" class="form-check-input" type="radio" value="3">
+    <label class="form-check-label">SoulSear</label>
+  </div>
+    <div class="form-check">
+    <input asp-for="SelectedProduct" class="form-check-input" type="radio" value="4">
+    <label class="form-check-label">PhantomClaw</label>
+  </div>
+
+<span asp-validation-for="SelectedProduct" class="text-danger"></span>
+
+<!-- Horizontal Lines -->
+<hr class="my-4">
+
+
+<!-- Tag Helpers for Name, Email, and message below-->
+<div class="mb-3">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control">
+        <!-- Perform Data Validation for name. Required -->
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Email" class="form-label"></label>
+    <input asp-for="Email" class="form-control">
+        <!-- Perform Data Validation for Email. Required -->
+    <span asp-validation-for="Email" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Message" class="form-label"></label>
+    <input asp-for="Message" class="form-control">
+        <!-- Perform Data Validation for Message. Required -->
+    <span asp-validation-for="Message" class="text-danger"></span>
+</div>
+
+
+<!--HTML tag <button> and btn + btnprimary bootstrap classes for submit button  -->
+ <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+<!-- Was unable to figure out correct output message, more commentary on Model page-->
+@if (Model.Name != string.Empty)
+{
+    <p><br>Thank you for your complaint about Selection Number: @Model.SelectedProduct - @Model.Name (@Model.Email). </p>
+    <br>  @Model.Message 
+}
+
+<!-- Add JS code for Data Validation -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
